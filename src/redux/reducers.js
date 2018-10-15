@@ -12,7 +12,17 @@ const searchTextReducer = (state = "", action) => {
 
 const tripsReducer = (state = [], action) => {
   switch (action.type) {
-    case"FETCHED_TRIPS":
+    case "TRIP_ADDED":
+      return [...state, action.trip];
+    case "TRIP_UPDATED":
+      return state.map(trip => {
+        if (trip.id === action.trip.id) {
+          return action.trip;
+        } else {
+          return trip;
+        }
+      });
+    case "FETCHED_TRIPS":
       return action.trips;
     default:
       return state;

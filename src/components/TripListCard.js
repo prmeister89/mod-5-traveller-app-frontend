@@ -7,16 +7,16 @@ class TripListCard extends Component {
 
   render() {
     return (
-      <div class='ui card'>
-        <div class='content'>
+      <div className='ui card'>
+        <div className='content'>
           <h1>{this.props.trip.location}</h1>
           <p>Insert Image Here</p>
           <h3>Dates</h3>
-          <li>{this.props.trip.startDate} - {this.props.trip.endDate}</li>
+          <li>{this.props.trip.startDateConverted} - {this.props.trip.endDateConverted}</li>
           <br></br>
 
           <NavLink className='item' to={`/trips/${this.props.trip.id}`}>
-            <button class='ui blue floated right floated button'>View Details</button>
+            <button className='ui blue floated right floated button'>View Details</button>
           </NavLink>
 
         </div>

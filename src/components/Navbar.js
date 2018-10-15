@@ -6,7 +6,7 @@ const Navbar = props => {
     <div className='ui inverted blue menu'>
       <Link to="/" className='item'>
         <h2 className='ui header'>
-          <i class='wpexplorer icon'></i>
+          <i className='wpexplorer icon'></i>
           <div className='content'>
           Traveller
           <div className='sub header'>Stress Less, Travel More</div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Searchbar from '../components/Searchbar';
@@ -20,10 +20,12 @@ class TripContainer extends Component {
       <div className='ui narrow container segment'>
         <Searchbar />
 
-        <button class='positive ui button'>
-        <i class='plus circle icon'></i>
-        Create Trip
-        </button>
+        <NavLink className='item' to={'/trips/new'}>
+          <button className='positive ui button'>
+          <i className='plus circle icon'></i>
+          Create Trip
+          </button>
+        </NavLink>
         <br></br>
         <br></br>
 
@@ -33,4 +35,4 @@ class TripContainer extends Component {
   }
 }
 
-export default withRouter(connect (null, { fetchTrips })(TripContainer));
+export default withRouter(connect(null, { fetchTrips })(TripContainer));
