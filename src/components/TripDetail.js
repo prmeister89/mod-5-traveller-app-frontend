@@ -1,33 +1,43 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchSpecificTrip } from '../redux/actions';
+
 
 import TripDetailContainer from '../containers/TripDetailContainer';
 
 class TripDetail extends Component {
+
+  componentDidMount() {
+    console.log(this.props)
+    const tripId = parseInt(this.props.tripId)
+    this.props.fetchSpecificTrip(tripId);
+  }
+
   render() {
-    if (!this.props.trip) {
+    if (!this.props.specificTrip) {
       return (
         <div className='ui segment'>
           <div className='ui active dimmer'>
             <div className='ui text loader'>
-            Loading Trip...
+              Loading Trip List...
             </div>
           </div>
         </div>
-      );
+      )
     }
     return (
       <div className='ui segments'>
-
         <div className='ui segment'>
-          <h2 className='ui header'>{this.props.trip.location}</h2>
+          <h2 className='ui header'>{this.props.specificTrip.location}</h2>
             <div className='ui medium buttons'>
               <Link to={'/trips'}>
                 <button className='ui button' type='button'>Back</button>
               </Link>
+
               <div className='or'></div>
-              <Link to={`/trips/${this.props.trip.id}/edit`}>
+
+              <Link to={`/trips/${this.props.specificTrip.id}/edit`}>
               <button className='ui button' type='button'>Edit</button>
               </Link>
             </div>
@@ -35,21 +45,20 @@ class TripDetail extends Component {
         <div className='ui horizontal segments'>
           <div className='ui segment'>
             <h3>From:</h3>
-            <p>{this.props.trip.startDateConverted}</p>
+            <p>{this.props.specificTrip.startDateConverted}</p>
           </div>
           <div className='ui segment'>
             <h3>To:</h3>
-            <p>{this.props.trip.endDateConverted}</p>
+            <p>{this.props.specificTrip.endDateConverted}</p>
           </div>
         </div>
 
         <div className='ui segment'>
           <h3>Notes:</h3>
-          <p>{this.props.trip.notes}</p>
+          <p>{this.props.specificTrip.notes}</p>
         </div>
-
         <div className='ui segment'>
-          <TripDetailContainer />
+          <TripDetailContainer trip={this.props.specificTrip}/>
         </div>
       </div>
     )
@@ -57,10 +66,10 @@ class TripDetail extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  let trip = state.trips.find(t => t.id === Number(props.tripId))
+  console.log(state)
   return {
-    trip: trip
+    specificTrip: state.specificTrip
   }
 }
 
-export default withRouter(connect(mapStateToProps, null)(TripDetail));
+export default withRouter(connect(mapStateToProps, { fetchSpecificTrip })(TripDetail));

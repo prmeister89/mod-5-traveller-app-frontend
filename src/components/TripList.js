@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TripListCard from './TripListCard';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
+import TripListCard from './TripListCard';
 
 class TripList extends Component {
   render() {
@@ -15,7 +15,8 @@ class TripList extends Component {
               </div>
             </div>
           </div>
-          : null}
+          : null
+        }
 
         <div className='ui blue cards'>
           {this.props.trips.map(trip => (

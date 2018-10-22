@@ -2,19 +2,20 @@ import React from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
 const TripDetailNavbar = props => {
+  const tripId = props.match.params.tripId
+
   return (
     <div className='ui top attached tabular menu'>
-      <NavLink exact to={`/trips/${props.id}/luggage`}>
-        <a className='item active'>Luggage</a>
+      <NavLink exact to={`/trips/${ tripId }/luggage`}>
+        <h4 className='active item'>Luggage</h4>
       </NavLink>
-      <NavLink exact to={`/trips/${props.id}/flight-info`}>
-        <a className='item'>Flight Information</a>
+
+      <NavLink exact to={`/trips/${ tripId }/flight-info`}>
+        <h4 className='item'>Flight Information</h4>
       </NavLink>
-      <NavLink exact to={`/trips/${props.id}/transportation`}>
-        <a className='item'>Transportation Information</a>
-      </NavLink>
-      <NavLink exact to={`/trips/${props.id}/arrival`}>
-        <a className='item'>Arrival</a>
+
+      <NavLink exact to={`/trips/${ tripId }/lodging`}>
+        <h4 className='item'>Lodging</h4>
       </NavLink>
     </div>
   );

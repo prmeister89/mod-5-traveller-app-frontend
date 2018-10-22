@@ -7,13 +7,13 @@ class TripDetailForm extends Component {
   state = {};
 
   static getDerivedStateFromProps(props, state) {
-    if (props.trip && props.trip.id !== state.id) {
+    if (props.specificTrip && props.specificTrip.id !== state.id) {
       return {
-        id: props.trip.id,
-        location: props.trip.location,
-        startDate: props.trip.startDate,
-        endDate: props.trip.endDate,
-        notes: props.trip.notes
+        id: props.specificTrip.id,
+        location: props.specificTrip.location,
+        startDate: props.specificTrip.startDate,
+        endDate: props.specificTrip.endDate,
+        notes: props.specificTrip.notes
       };
     }
     return null;
@@ -28,14 +28,14 @@ class TripDetailForm extends Component {
       notes: this.state.notes
     };
     this.props.updateTripInfo({
-      tripId: this.props.trip.id,
+      tripId: this.props.specificTrip.id,
       payload
     });
-    this.props.history.push("/trips/" + this.props.trip.id);
+    this.props.history.push("/trips/" + this.props.specificTrip.id);
   };
 
   render() {
-    if (!this.props.trip) {
+    if (!this.props.specificTrip) {
       return (
         <div className='ui segment'>
           <div className='ui active dimmer'>
@@ -46,6 +46,7 @@ class TripDetailForm extends Component {
         </div>
       );
     }
+
     return (
       <div>
         <form className='ui form' onSubmit={this.onSave}>
@@ -89,7 +90,7 @@ class TripDetailForm extends Component {
             onChange={e => this.setState({ notes: e.target.value })}
             />
           </div>
-          <Link to={`/trips/${this.props.trip.id}`}>
+          <Link to={`/trips/${this.props.specificTrip.id}`}>
             <button className='ui button' type='button'>Cancel</button>
           </Link>
           <button className='ui button' type='submit'>Submit</button>
@@ -100,9 +101,9 @@ class TripDetailForm extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  let trip = state.trips.find(t => t.id === Number(props.tripId))
+  console.log(state)
   return {
-    trip: trip
+    specificTrip: state.specificTrip
   }
 }
 

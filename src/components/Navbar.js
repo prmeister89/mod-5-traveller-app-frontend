@@ -14,7 +14,7 @@ const Navbar = props => {
         </h2>
       </Link>
       <NavLink exact to="/trips" activeClassName='active item' className='item'>
-      <h3 className='ui header'>My Trips</h3>
+        <h3 className='ui header'>My Trips</h3>
       </NavLink>
     </div>
   );

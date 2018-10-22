@@ -13,6 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
+
         <Switch>
           <Route path="/trips/new" component={NewTripForm} />
 
