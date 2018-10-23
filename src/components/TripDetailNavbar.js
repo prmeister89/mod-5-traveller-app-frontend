@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
-const TripDetailNavbar = props => {
-  const tripId = props.match.params.tripId
+class TripDetailNavbar extends Component {
+  state = {
+    className: ""
+  };
 
-  return (
-    <div className='ui top attached tabular menu'>
-      <NavLink exact to={`/trips/${ tripId }/luggage`}>
-        <h4 className='active item'>Luggage</h4>
-      </NavLink>
+  handleOnClick = (e, { name }) => this.setState({ className: "active item" })
 
-      <NavLink exact to={`/trips/${ tripId }/flight-info`}>
-        <h4 className='item'>Flight Information</h4>
-      </NavLink>
+  render() {
+    const tripId = this.props.match.params.tripId
+    const { className } = this.state
+    return (
+      <div className='ui top attached tabular menu'>
+        <NavLink exact to={`/trips/${ tripId }/luggage`}>
+          <h4 className='active item'>Luggage</h4>
+        </NavLink>
 
-      <NavLink exact to={`/trips/${ tripId }/lodging`}>
-        <h4 className='item'>Lodging</h4>
-      </NavLink>
-    </div>
-  );
+        <NavLink exact to={`/trips/${ tripId }/flight-info`}>
+          <h4 className='item'>Flight Information</h4>
+        </NavLink>
+
+        <NavLink exact to={`/trips/${ tripId }/lodging`}>
+          <h4 className='item'>Lodging</h4>
+        </NavLink>
+      </div>
+    )
+  }
 };
 
-const TripDetailNavBarWithRouter = withRouter(TripDetailNavbar);
-
-export default TripDetailNavBarWithRouter;
+export default withRouter(TripDetailNavbar);

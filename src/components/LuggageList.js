@@ -6,13 +6,13 @@ import { deleteLuggageItem, fetchSpecificTripLuggageList } from '../redux/action
 
 
 class LuggageList extends Component {
-  state = {}
+  state = {};
 
-  componentDidMount() {
-    this.setState({
-      specificTrip: this.props.specificTrip
-    })
-  };
+  // componentDidMount() {
+  //   this.setState({
+  //     specificTrip: this.props.specificTrip
+  //   })
+  // };
 
   handleOnDelete = (itemId) => {
     const tripId = this.props.specificTrip.id
@@ -29,7 +29,7 @@ class LuggageList extends Component {
         <div className='ui segment'>
           <div className='ui active dimmer'>
             <div className='ui text loader'>
-              Loading Trip List...
+              Loading Luggage List...
             </div>
           </div>
         </div>

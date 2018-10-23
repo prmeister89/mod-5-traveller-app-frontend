@@ -3,8 +3,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 class TripListCard extends Component {
 
-
-
   render() {
     return (
       <div className='ui card'>

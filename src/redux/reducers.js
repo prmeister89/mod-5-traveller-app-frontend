@@ -13,6 +13,8 @@ const searchTextReducer = (state = "", action) => {
 const specificTripReducer = (state = {}, action) => {
   console.log("state:", state, "action:", action)
   let newLuggageArray = [];
+  let newFlightInfoArray = [];
+
   switch (action.type) {
     case "FETCHED_SPECIFIC_TRIP":
       return action.trip;
@@ -20,12 +22,18 @@ const specificTripReducer = (state = {}, action) => {
       return action.tripLuggageList;
     case "LUGGAGE_ITEM_ADDED":
       newLuggageArray = [...state.luggages, action.newItem];
-      return {...state,luggages: newLuggageArray};
+      return {...state, luggages: newLuggageArray};
     case "LUGGAGE_ITEM_DELETED":
       newLuggageArray = state.luggages.filter(item => item.id !== action.item.id);
       return {...state, luggages: newLuggageArray};
     case "UPDATE_LUGGAGE":
       return [...state.luggages, action.item];
+    case "FLIGHT_INFO_ADDED":
+      newFlightInfoArray = [...state.flights, action.newFlightInfo];
+      return {...state, flights: newFlightInfoArray};
+    case "FLIGHT_INFO_DELETED":
+      newFlightInfoArray = state.flights.filter(flight => flight.id !== action.flight.id);
+      return {...state, flights: newFlightInfoArray};
     default:
       return state;
   }
@@ -63,6 +71,10 @@ const loadingReducer = (state = false, action) => {
     case "FETCHING_SPECIFIC_TRIP_LUGGAGE_LIST":
       return true;
     case "FETCHED_SPECIFIC_TRIP_LUGGAGE_LIST":
+      return false;
+    case "FETCHING_SPECIFIC_TRIP_FLIGHT_INFO_LIST":
+      return true;
+    case "FETCHED_SPECIFIC_TRIP_FLIGHT_INFO_LIST":
       return false;
     default:
       return state;

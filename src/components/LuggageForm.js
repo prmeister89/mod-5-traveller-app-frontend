@@ -12,8 +12,8 @@ class LuggageForm extends Component {
   };
 
   handleOnSubmit = (e) => {
-    const newItem = this.state;
     e.preventDefault();
+    const newItem = this.state;
 
     const tripId = parseInt(this.props.tripId)
 
@@ -78,26 +78,3 @@ const mapStateToProps = (state, props) => {
 }
 
 export default withRouter(connect(mapStateToProps, { addLuggageItem, updateLuggageItems })(LuggageForm));
-
-
-
-
-
-
-
-
-
-
-
-
-// increaseItems = () => {
-//   this.setState({
-//     numberOfItems: this.state.numberOfItems + 1
-//   });
-// };
-
-
-// <button className='ui left floated green basic button' onClick={this.increaseItems}>
-// <i className='plus circle icon'></i>
-// Add Item
-// </button>

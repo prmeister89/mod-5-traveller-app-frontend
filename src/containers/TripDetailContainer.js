@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import TripDetailNavbar from '../components/TripDetailNavbar';
-import LuggageList from '../components/LuggageList';
 
+import LuggageList from '../components/LuggageList';
 import LuggageForm from '../components/LuggageForm';
-import FlightInfo from '../components/FlightInfo';
+import FlightInfoForm from '../components/FlightInfoForm';
+import FlightInfoList from '../components/FlightInfoList';
 import Lodging from '../components/Lodging';
 
 class TripDetailContainer extends Component {
@@ -27,7 +28,8 @@ class TripDetailContainer extends Component {
           <Route exact path="/trips/:tripId/flight-info" render={data => {
             return (
               <div className='ui bottom attached segment'>
-                <FlightInfo tripId={data.match.params.tripId} />
+                <FlightInfoForm tripId={data.match.params.tripId} />
+                <FlightInfoList tripId={data.match.params.tripId} />
               </div>
             );
           }}

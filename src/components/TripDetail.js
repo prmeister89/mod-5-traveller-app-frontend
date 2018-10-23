@@ -38,7 +38,7 @@ class TripDetail extends Component {
               <div className='or'></div>
 
               <Link to={`/trips/${this.props.specificTrip.id}/edit`}>
-              <button className='ui button' type='button'>Edit</button>
+                <button className='ui button' type='button'>Edit</button>
               </Link>
             </div>
         </div>
