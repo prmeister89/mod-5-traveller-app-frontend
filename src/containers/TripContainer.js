@@ -30,7 +30,7 @@ class TripContainer extends Component {
         <br></br>
         <br></br>
 
-        <TripList />
+        <TripList trips={this.props.trips}/>
       </div>
     )
   }

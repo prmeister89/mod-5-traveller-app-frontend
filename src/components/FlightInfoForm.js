@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink, withRouter,  } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addFlightInfo } from '../redux/actions';
+import NumPad from 'react-numpad';
 
 class FlightInfoForm extends Component {
   state = {
@@ -24,6 +25,7 @@ class FlightInfoForm extends Component {
 
     this.props.addFlightInfo(newFlightInfo);
     this.props.history.push("/trips/" + tripId + "/flight-info");
+    e.target.reset();
   }
   render() {
     return (
@@ -56,10 +58,13 @@ class FlightInfoForm extends Component {
                 <input type='text' value={this.state.flightNumber} onChange={e => this.setState({ flightNumber: e.target.value })}/>
               </div>
               <div className='field'>
-                <label>Departure</label>
-                <select class='ui search dropdown'>
-                  <option value="">Time</option>
-                </select>
+                <NumPad.Time
+                  onChange={e => this.setState({ departure: e })}
+                  value={this.state.departure}
+                  position='center'
+                  label={'Departure'}
+                  placeholder={'--:--'}
+                />
               </div>
             </div>
           </div>

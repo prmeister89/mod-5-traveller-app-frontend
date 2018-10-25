@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import TripListCard from './TripListCard';
 
 class TripList extends Component {
+  state={};
+
   render() {
     return (
       <div className='ui inverted container'>
@@ -34,7 +36,7 @@ const mapStateToProps = state => {
     trips: state.trips.filter(
       trip =>
         trip.location.toLowerCase().includes(state.searchText.toLowerCase()) ||
-        trip.notes.toLowerCase().includes(state.searchText.toLowerCase())
+        trip.startDateConverted.toLowerCase().includes(state.searchText.toLowerCase())
     )
   }
 }

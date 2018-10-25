@@ -2,20 +2,29 @@ import React from 'react';
 import { Link, NavLink, withRouter } from 'react-router-dom';
 
 const Navbar = props => {
+
   return (
-    <div className='ui inverted blue menu'>
-      <Link to="/" className='item'>
-        <h2 className='ui header'>
+    <div className='ui fluid horizontal inverted blue menu'>
+      <Link to="/" className='fluid item'>
+        <h3 className='ui inverted header'>
           <i className='wpexplorer icon'></i>
           <div className='content'>
           Traveller
-          <div className='sub header'>Stress Less, Travel More</div>
+          <div className='inverted sub header'>Stress Less, Travel More</div>
           </div>
-        </h2>
+        </h3>
       </Link>
-      <NavLink exact to="/trips" activeClassName='active item' className='item'>
-        <h3 className='ui header'>My Trips</h3>
+      <NavLink exact to="/trips" className='active item'>
+        My Trips
       </NavLink>
+      <div className='fluid right menu'>
+        <div className='item'>
+          Signed-In as: Peter M. <i className="dropdown icon"></i>
+        </div>
+        <NavLink className='item' to={`/login`}>
+          Logout <i className="blind icon"></i>
+        </NavLink>
+      </div>
     </div>
   );
 };

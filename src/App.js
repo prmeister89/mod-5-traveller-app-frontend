@@ -3,9 +3,10 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Navbar from './components/Navbar'
 import TripContainer from './containers/TripContainer';
-import TripDetail from './components/TripDetail';
-import TripDetailForm from './components/TripDetailForm';
 import NewTripForm from './components/NewTripForm';
+import TripDetailForm from './components/TripDetailForm';
+import TripDetail from './components/TripDetail';
+import Login from './components/Login';
 
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
         <Navbar />
 
         <Switch>
+          <Route path="/login" component={Login} />
           <Route path="/trips/new" component={NewTripForm} />
 
           <Route path="/trips/:tripId/edit" render={data => {

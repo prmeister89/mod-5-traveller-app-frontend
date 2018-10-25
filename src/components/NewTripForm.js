@@ -12,7 +12,8 @@ class NewTripForm extends Component {
     location: "",
     startDate: moment(),
     endDate: moment(),
-    notes: ""
+    notes: "",
+    url: ""
   }
 
   handleOnSubmit = (e) => {
@@ -21,7 +22,8 @@ class NewTripForm extends Component {
       location: this.state.location,
       startDate: this.state.startDate.format("DD-MM-YYYY"),
       endDate: this.state.endDate.format("DD-MM-YYYY"),
-      notes: this.state.notes
+      notes: this.state.notes,
+      url: this.state.url
     }
 
     this.props.addTrip(trip)
@@ -56,10 +58,15 @@ class NewTripForm extends Component {
           <label>Location</label>
           <input type='text' placeholder='Where are you going?' id='location' value={this.state.location} onChange={this.handleOnChange} />
         </div>
+        <div className='field'>
+          <label>Image</label>
+          <input type='text' placeholder='Insert Image URL' id='url' value={this.state.url} onChange={this.handleOnChange} />
+        </div>
         <div className='two fields'>
           <div className='field'>
             <label>From</label>
             <DatePicker
+              inline
               id='startDate'
               selected={this.state.startDate}
               selectsStart
@@ -71,6 +78,7 @@ class NewTripForm extends Component {
           <div className='field'>
             <label>To</label>
             <DatePicker
+              inline
               id='endDate'
               selected={this.state.endDate}
               selectsEnd

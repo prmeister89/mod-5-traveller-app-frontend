@@ -4,13 +4,14 @@ import { changeSearchText } from '../redux/actions'
 
 const Searchbar = props => (
   <div className='ui container'>
-    <div className='ui very large fluid input'>
+    <div className='ui very large fluid icon input'>
       <input
         type='text'
-        placeholder='Search'
+        placeholder='Search...'
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
       />
+      <i class="search icon"></i>
     </div>
     <div className='ui clearing section divider' />
   </div>

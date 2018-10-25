@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { updateTrip } from '../redux/actions';
@@ -11,8 +15,8 @@ class TripDetailForm extends Component {
       return {
         id: props.specificTrip.id,
         location: props.specificTrip.location,
-        startDate: props.specificTrip.startDate,
-        endDate: props.specificTrip.endDate,
+        startDate: moment(props.specificTrip.startDateConverted),
+        endDate: moment(props.specificTrip.endDateConverted),
         notes: props.specificTrip.notes
       };
     }
@@ -23,8 +27,8 @@ class TripDetailForm extends Component {
     e.preventDefault();
     let payload = {
       location: this.state.location,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
+      startDate: this.state.startDate.format("DD-MM-YYYY"),
+      endDate: this.state.endDate.format("DD-MM-YYYY"),
       notes: this.state.notes
     };
     this.props.updateTripInfo({
@@ -33,6 +37,26 @@ class TripDetailForm extends Component {
     });
     this.props.history.push("/trips/" + this.props.specificTrip.id);
   };
+
+  handleOnChange = (e) => {
+    e.persist();
+    this.setState({
+      [e.target.id]: e.target.value
+    })
+  };
+
+  //DatePicker functions
+  handleChangeStart = (e) => {
+    this.setState({
+      startDate: e
+    })
+  }
+
+  handleChangeEnd = (e) => {
+    this.setState({
+      endDate: e
+    })
+  }
 
   render() {
     if (!this.props.specificTrip) {
@@ -44,58 +68,51 @@ class TripDetailForm extends Component {
             </div>
           </div>
         </div>
-      );
-    }
+      )
+    };
 
     return (
-      <div>
-        <form className='ui form' onSubmit={this.onSave}>
-          <div>
-            <label>Location:</label>
-            <input
-              className='ui field'
-              type='text'
-              name='location'
-              value={this.state.location}
-              onChange={e => this.setState({ location: e.target.value })}
+      <form className='ui form' onSubmit={this.onSave}>
+        <h4 className='ui dividing header'>Edit Your Trip</h4>
+        <div className='field'>
+          <label>Location</label>
+          <input type='text' id='location' value={this.state.location} onChange={this.handleOnChange} />
+        </div>
+        <div className='two fields'>
+          <div className='field'>
+            <label>From</label>
+            <DatePicker
+              inline
+              id='startDate'
+              selected={this.state.startDate}
+              selectsStart
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeStart}
             />
           </div>
-          <div>
-            <label>From:</label>
-            <input
-              className='ui field'
-              placeholder='DD-MM-YYYY'
-              type='text'
-              name='startDate'
-              value={this.state.startDate}
-              onChange={e => this.setState({ startDate: e.target.value })}
-            />
-            <label>To:</label>
-            <input
-              className='ui field'
-              placeholder='DD-MM-YYYY'
-              type='text'
-              name='endDate'
-              value={this.state.endDate}
-              onChange={e => this.setState({ endDate: e.target.value })}
+          <div className='field'>
+            <label>To</label>
+            <DatePicker
+              inline
+              id='endDate'
+              selected={this.state.endDate}
+              selectsEnd
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              onChange={this.handleChangeEnd}
             />
           </div>
-          <div>
-            <label>Notes:</label>
-            <input
-            className='ui field'
-            type='text'
-            name='notes'
-            value={this.state.notes}
-            onChange={e => this.setState({ notes: e.target.value })}
-            />
-          </div>
-          <Link to={`/trips/${this.props.specificTrip.id}`}>
-            <button className='ui button' type='button'>Cancel</button>
-          </Link>
-          <button className='ui button' type='submit'>Submit</button>
-        </form>
-      </div>
+        </div>
+        <div className='field'>
+          <label>Notes:</label>
+          <textarea type='text' id='notes' value={this.state.notes} onChange={this.handleOnChange} />
+        </div>
+        <Link to={`/trips/${this.props.specificTrip.id}`}>
+          <button className='ui button' type='button'>Cancel</button>
+        </Link>
+        <button className='ui button' type='submit'>Submit</button>
+      </form>
     )
   }
 }

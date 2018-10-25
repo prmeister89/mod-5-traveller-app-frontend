@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import TripDetailNavbar from '../components/TripDetailNavbar';
 
-import LuggageList from '../components/LuggageList';
 import LuggageForm from '../components/LuggageForm';
+import LuggageList from '../components/LuggageList';
 import FlightInfoForm from '../components/FlightInfoForm';
 import FlightInfoList from '../components/FlightInfoList';
-import Lodging from '../components/Lodging';
+import LodgingForm from '../components/LodgingForm';
+import LodgingList from '../components/LodgingList';
 
 class TripDetailContainer extends Component {
   render() {
@@ -28,17 +29,18 @@ class TripDetailContainer extends Component {
           <Route exact path="/trips/:tripId/flight-info" render={data => {
             return (
               <div className='ui bottom attached segment'>
-                <FlightInfoForm tripId={data.match.params.tripId} />
                 <FlightInfoList tripId={data.match.params.tripId} />
+                <FlightInfoForm tripId={data.match.params.tripId} />
               </div>
             );
           }}
           />
 
-          <Route exact path="/trips/:tripId/arrival" render={data => {
+          <Route exact path="/trips/:tripId/lodging" render={data => {
             return (
               <div className='ui bottom attached segment'>
-                <Lodging tripId={data.match.params.tripId} />
+                <LodgingList tripId={data.match.params.tripId} />
+                <LodgingForm tripId={data.match.params.tripId} />
               </div>
             );
           }}

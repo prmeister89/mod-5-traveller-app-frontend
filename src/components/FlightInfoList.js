@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import { NavLink, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import FlightInfoForm from './FlightInfoForm'
@@ -31,6 +32,7 @@ class FlightInfoList extends Component {
     }
 
     const trip = this.props.specificTrip;
+
     return (
       <div className='ui two stackable cards'>
         {trip.flights.map(flight => (
@@ -51,7 +53,7 @@ class FlightInfoList extends Component {
               </div>
             </div>
 
-            <h4 className='ui blue dividing header'>Flight</h4>
+            <h4 className='ui blue dividing header'>Flight Details</h4>
             <table className='ui definition table'>
               <tbody>
                 <tr>
@@ -60,7 +62,7 @@ class FlightInfoList extends Component {
                 </tr>
                 <tr>
                   <td>Departs</td>
-                  <td>{flight.departure}</td>
+                  <td>{flight.departureConverted}</td>
                 </tr>
                 <tr>
                   <td>Gate</td>
@@ -76,9 +78,13 @@ class FlightInfoList extends Component {
                 </tr>
               </tbody>
             </table>
-
             <h4 className='ui blue dividing header'></h4>
-              <button className='fluid ui basic grey button'>Edit</button>
+            <div className='ui embed'>
+              <iframe allowFullScreen='true' />
+                <img className='ui fluid image' src={flight.ticket} />
+            </div>
+            <h4 className='ui blue dividing header'></h4>
+              <button className='fluid ui basic grey button' onClick={e => this.props.handleOnEdit}>Edit</button>
             </div>
           </div>
           ))}

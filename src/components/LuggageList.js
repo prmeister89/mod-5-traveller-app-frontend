@@ -39,9 +39,6 @@ class LuggageList extends Component {
     // console.log(trip.luggages)
     return (
       <div className='ui middle aligned divided list'>
-        <div className='item'>
-          <button className='ui right floated red basic button' type='submit'>Delete All</button>
-        </div>
         {trip.luggages.map(luggage => (
           <div id={luggage.id} className='item'>
             <NavLink to={`/trips/${this.props.specificTrip.id}/luggage`}>
@@ -67,3 +64,10 @@ const mapStateToProps = (state, props) => {
 }
 
 export default withRouter(connect(mapStateToProps, { deleteLuggageItem, fetchSpecificTripLuggageList })(LuggageList));
+
+
+
+//I'd like to add a DELETE_ALL button...here it is, just hook it up
+// <div className='item'>
+// <button className='ui right floated red basic button' type='submit'>Delete All</button>
+// </div>
