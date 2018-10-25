@@ -51,11 +51,24 @@ const specificTripReducer = (state = {}, action) => {
 }
 
 const tripsReducer = (state = [], action) => {
+  let newTripArray = [];
+
   switch (action.type) {
     case "FETCHED_TRIPS":
-      return action.trips;
+      return action.trips.sort(function(a, b) {
+        return a.startDateConverted.split("-")[0] - b.startDateConverted.split("-")[0]
+      });
     case "TRIP_ADDED":
       return [...state, action.trip];
+    case "TRIP_DELETED":
+      console.log(state)
+      newTripArray = state.map(trip => {
+        if (trip.id !== action.trip.id) {
+          return newTripArray
+        } else {
+          return state
+        }
+      })
     case "TRIP_UPDATED":
       return state.map(trip => {
         if (trip.id === action.trip.id) {

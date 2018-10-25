@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { deleteTrip } from '../redux/actions';
+
+
 
 class TripListCard extends Component {
+
+  handleOnDelete = (tripId) => {
+    const tripCardId = this.props.trip.id
+    console.log("tripId:", tripId)
+
+    this.props.deleteTrip(tripId);
+    this.props.history.push('/trips');
+  }
 
   render() {
     return (
       <div className='ui card'>
         <div className='content'>
+        <NavLink to={`/trips`}>
+          <button className='ui inverted right floated icon button' tripId={this.props.trip.id} onClick={e => this.handleOnDelete(this.props.trip.id)}>
+            <i className='red remove icon' />
+          </button>
+        </NavLink>
+        <br></br>
           <div className='ui segment'>
             <h1>{this.props.trip.location}</h1>
           </div>
@@ -35,4 +53,4 @@ class TripListCard extends Component {
   }
 }
 
-export default withRouter(TripListCard);
+export default withRouter(connect(null, { deleteTrip })(TripListCard));

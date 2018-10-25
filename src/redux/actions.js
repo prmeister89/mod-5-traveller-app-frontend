@@ -101,6 +101,30 @@ function updateTrip({ payload, tripId }) {
   }
 }
 
+function tripDeleted(trip) {
+  console.log("tripDeleted function:", trip)
+  return { type: "TRIP_DELETED", trip };
+}
+
+function deleteTrip(tripId) {
+  console.log(tripId)
+  return dispatch => {
+    fetch(`${URL}/${tripId}`, {
+      method: 'DELETE',
+      headers: {
+        "Accept":"application/json",
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(tripId)
+    })
+    .then(res => res.json())
+    .then(json => {
+      dispatch(tripDeleted(json))
+      dispatch(fetchTrips())
+    })
+  }
+}
+
 //LUGGAGE
 function fetchedSpecificTripLuggageList(tripLuggageList) {
   return { type: "FETCHED_SPECIFIC_TRIP_LUGGAGE_LIST", tripLuggageList}
@@ -260,6 +284,36 @@ function deleteFlightInfo(flightId, tripId) {
   }
 }
 
+// function tripUpdated(trip) {
+//   console.log(trip)
+//   return { type: "TRIP_UPDATED", trip };
+// }
+//
+// function updateFlightInfo({ payload, tripId }) {
+//   console.log(payload, tripId)
+//   return dispatch => {
+//     fetch(`${URL}/${tripId}/flights/${payload.id}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Accept":"application/json",
+//         "Content-Type":"application/json"
+//       },
+//       body: JSON.stringify({
+//         trip_id: payload.trip_id,
+//         from: payload.from,
+//         to: payload.to,
+//         flightNumber: payload.flightNumber,
+//         departure: payload.departure,
+//         gate: payload.gate,
+//         boardingGroup: payload.boardingGroup,
+//         seat: payload.seat
+//       })
+//     })
+//     .then(res => res.json())
+//     .then(trip => console.log(trip))
+//   }
+// }
+
 //LODGING
 function lodgingAdded(newLodging) {
   console.log("lodgingAdded function:",newLodging)
@@ -312,6 +366,7 @@ export {
   fetchSpecificTripLodgingList,
   addTrip,
   updateTrip,
+  deleteTrip,
   addLuggageItem,
   deleteLuggageItem,
   updateLuggageItems,

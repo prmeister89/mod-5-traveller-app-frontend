@@ -10,11 +10,9 @@ class TripList extends Component {
     return (
       <div className='ui inverted container'>
         {this.props.loading ?
-          <div className='ui segment'>
-            <div className='ui active dimmer'>
-              <div className='ui text loader'>
-              Loading Trip List...
-              </div>
+          <div className='ui active dimmer'>
+            <div className='ui text loader'>
+            Loading Trip List...
             </div>
           </div>
           : null

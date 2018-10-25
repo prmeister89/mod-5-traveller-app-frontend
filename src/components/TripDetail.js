@@ -20,7 +20,7 @@ class TripDetail extends Component {
         <div className='ui segment'>
           <div className='ui active dimmer'>
             <div className='ui text loader'>
-              Loading Trip List...
+              Loading Trip Details...
             </div>
           </div>
         </div>
