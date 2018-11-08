@@ -1,4 +1,4 @@
-const URL = "http://localhost:3000/trips";
+const URL = "https://traveller-app-api.herokuapp.com/trips";
 
 function changeSearchText(value) {
   return { type: "CHANGE_SEARCH_TEXT", value: value };

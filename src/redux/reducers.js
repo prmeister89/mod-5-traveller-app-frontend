@@ -55,9 +55,7 @@ const tripsReducer = (state = [], action) => {
 
   switch (action.type) {
     case "FETCHED_TRIPS":
-      return action.trips.sort(function(a, b) {
-        return a.startDateConverted.split("-")[0] - b.startDateConverted.split("-")[0]
-      });
+      return action.trips;
     case "TRIP_ADDED":
       return [...state, action.trip];
     case "TRIP_DELETED":
